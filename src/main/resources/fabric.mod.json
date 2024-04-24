@@ -1,12 +1,13 @@
 {
   "schemaVersion": 1,
-  "id": "template",
+  "id": "kaleidoscopic",
   "version": "${version}",
 
-  "name": "Template",
+  "name": "Kaleidoscopic Stones",
   "description": "ADDME",
   "authors": [
-    "Leah (@leafenzio), Tellio (@tellioaridoitsu)"
+    "Leah (@leafenzio on Twitter)",
+    "Eliza (@tellioaridoitsu)"
   ],
   "contact": {
     "homepage": "ADDME - website link",
@@ -19,18 +20,18 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.leafenzo.template.ModInit"
+      "net.leafenzo.kaleidoscopic.ModInit"
     ],
     "client": [
-      "net.leafenzo.template.ModClientInit"
+      "net.leafenzo.kaleidoscopic.ModClientInit"
     ],
     "fabric-datagen": [
-      "net.leafenzo.template.datageneration.ModDataGenerator"
+      "net.leafenzo.kaleidoscopic.datageneration.ModDataGenerator"
     ]
   },
-  "accessWidener": "template.accesswidener",
+  "accessWidener": "kaleidoscopic.accesswidener",
   "mixins": [
-    "template.mixins.json"
+    "kaleidoscopic.mixins.json"
   ],
 
   "depends": {
