@@ -93,6 +93,7 @@ public class ModBlocks {
         ArrayList<Block> bs = new ArrayList<Block>();
         for (DyeColor color : DyeColor.values()) {
             Block b = registerDyedRockBrick(color);
+            DYECOLOR_FROM_BLOCK.put(b, color);
             bs.add(b);
         }
         return bs;

@@ -8,6 +8,7 @@ package net.leafenzo.kaleidoscopic.util;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.entry.RegistryEntryList;
@@ -128,6 +129,12 @@ public class ModUtil {
 //        }
 //        return BLACK_VANILLA_FUNCTIONAL_BLOCKS;
 //    }
+
+    public static void addToIfNotNull(ArrayList<ItemStack> collection, ItemConvertible item) {
+        if (item != null) {
+            collection.add(item.asItem().getDefaultStack());
+        }
+    }
 
     public static <T> T[] concat(T[] array1, T[] array2) {
         T[] result = Arrays.copyOf(array1, array1.length + array2.length);
