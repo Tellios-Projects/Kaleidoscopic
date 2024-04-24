@@ -146,7 +146,17 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
     @Override
     public void generate(Consumer<RecipeJsonProvider> exporter) {
-        offerWaxingRecipes(exporter);
+
+//        for(Block block : ModBlocks.DYED_ROCKS) {
+//            blockStateModelGenerator.registerCubeAllModelTexturePool(block);
+//        }
+//        for(Block block : ModBlocks.DYED_POLISHED_ROCKS) {
+//            blockStateModelGenerator.registerCubeAllModelTexturePool(block);
+//        }
+//        for(Block block : ModBlocks.DYED_ROCK_BRICKS) {
+//            blockStateModelGenerator.registerCubeAllModelTexturePool(block);
+//        }
+
         //offerReversibleCompactingRecipes(exporter, RecipeCategory.MISC, Items.BLAZE_ROD, RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLAZE_ROD_BLOCK);
     }
 }

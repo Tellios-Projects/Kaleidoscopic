@@ -193,6 +193,17 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
+
+        for(Block block : ModBlocks.DYED_ROCKS) {
+            blockStateModelGenerator.registerCubeAllModelTexturePool(block);
+        }
+        for(Block block : ModBlocks.DYED_POLISHED_ROCKS) {
+            blockStateModelGenerator.registerCubeAllModelTexturePool(block);
+        }
+        for(Block block : ModBlocks.DYED_ROCK_BRICKS) {
+            blockStateModelGenerator.registerCubeAllModelTexturePool(block);
+        }
+
         // Block Models
         // Cube with all sides the same texture, IE Dirt
         // blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.COMPRESSED_STONE);

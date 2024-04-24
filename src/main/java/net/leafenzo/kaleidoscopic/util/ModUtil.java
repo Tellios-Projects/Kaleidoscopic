@@ -8,6 +8,7 @@ package net.leafenzo.kaleidoscopic.util;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.entry.RegistryEntryList;
 import net.minecraft.registry.tag.TagKey;
@@ -159,6 +160,13 @@ public class ModUtil {
         return capitalizeWord.toString().trim();
     }
 
+    public static Collection<ItemStack> toItemStacks(ArrayList<Block> blocks) {
+        ArrayList<ItemStack> stacks = new ArrayList<ItemStack>();
+        for (Block block : blocks) {
+            stacks.add(block.asItem().getDefaultStack());
+        }
+        return stacks;
+    }
 
     public static Set<Identifier> allBlockIdsInNamespace(String namespace) {
         Set<Identifier> set = Registries.BLOCK.getIds();

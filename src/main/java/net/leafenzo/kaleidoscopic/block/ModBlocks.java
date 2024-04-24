@@ -29,6 +29,7 @@ import java.util.HashMap;
 import java.util.function.ToIntFunction;
 
 public class ModBlocks {
+    public static final HashMap<Block, DyeColor> DYECOLOR_FROM_BLOCK = new HashMap<Block, DyeColor>();
     public static final HashMap<Block, FlowerPotBlock> FLOWER_POT_FROM_BLOCK = new HashMap<Block, FlowerPotBlock>();
     public static final ArrayList<Block> SMALL_FLOWERS = new ArrayList<Block>();
     public static final ArrayList<Block> FLOWER_POTS = new ArrayList<Block>();
@@ -56,8 +57,52 @@ public class ModBlocks {
     public static final ArrayList<Block> SAPLINGS = new ArrayList<Block>();
     public static final ArrayList<WoodSet> WOODSETS = new ArrayList<WoodSet>();
 
-    //public static final Block BLAZE_ROD_BLOCK = registerBlock("blaze_rod_block", new ReversiblePillarBlock(FabricBlockSettings.copyOf(Blocks.STONE).mapColor(MapColor.TERRACOTTA_YELLOW).requiresTool().strength(2.0f).sounds(ModBlockSoundGroup.BLAZE_ROD_BLOCK).luminance(state -> 7)),ModItemGroups.SQUASHED);
-
+    //TODO stair and slab variants for rocks (sans polished) and bricks
+    public static final ArrayList<Block> DYED_ROCKS = dyedRocks();
+    private static ArrayList<Block> dyedRocks() {
+        ArrayList<Block> bs = new ArrayList<Block>();
+        for (DyeColor color : DyeColor.values()) {
+            Block b = registerDyedRock(color);
+            bs.add(b);
+        }
+        return bs;
+    }
+    public static Block registerDyedRock(DyeColor color) {
+        Block b = registerBlock(color.getName() + "_rock", new Block(FabricBlockSettings.copyOf(Blocks.COBBLESTONE).mapColor(color.getMapColor())), null);
+        DYECOLOR_FROM_BLOCK.put(b, color);
+        return b;
+    }
+    
+    public static final ArrayList<Block> DYED_POLISHED_ROCKS = dyedPolishedRocks();
+    private static ArrayList<Block> dyedPolishedRocks() {
+        ArrayList<Block> bs = new ArrayList<Block>();
+        for (DyeColor color : DyeColor.values()) {
+            Block b = registerDyedPolishedRock(color);
+            bs.add(b);
+        }
+        return bs;
+    }
+    public static Block registerDyedPolishedRock(DyeColor color) {
+        Block b = registerBlock("polished_" + color.getName() + "_rock", new Block(FabricBlockSettings.copyOf(Blocks.COBBLESTONE).mapColor(color.getMapColor())), null);
+        DYECOLOR_FROM_BLOCK.put(b, color);
+        return b;
+    }
+    
+    public static final ArrayList<Block> DYED_ROCK_BRICKS = dyedRockBricks();
+    private static ArrayList<Block> dyedRockBricks() {
+        ArrayList<Block> bs = new ArrayList<Block>();
+        for (DyeColor color : DyeColor.values()) {
+            Block b = registerDyedRockBrick(color);
+            bs.add(b);
+        }
+        return bs;
+    }
+    public static Block registerDyedRockBrick(DyeColor color) {
+        Block b = registerBlock(color.getName() + "_rock_bricks", new Block(FabricBlockSettings.copyOf(Blocks.BRICKS).mapColor(color.getMapColor())), null);
+        DYECOLOR_FROM_BLOCK.put(b, color);
+        return b;
+    }
+    
     public static Block registerBlock(String name, Block block, ItemGroup group) {
         registerBlockItem(name,block,group);
         //if(block.getDefaultState().isOpaque()) { ModRenderLayers.registerCutout(block);  }
