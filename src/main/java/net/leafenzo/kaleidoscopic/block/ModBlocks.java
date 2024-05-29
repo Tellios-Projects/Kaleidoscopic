@@ -5,20 +5,18 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.leafenzo.kaleidoscopic.ModInit;
 import net.leafenzo.kaleidoscopic.Super;
-import net.leafenzo.kaleidoscopic.item.ModItemGroups;
+import net.leafenzo.kaleidoscopic.registration.ModRegistryHelper;
 import net.leafenzo.kaleidoscopic.registration.WoodSet;
-import net.leafenzo.kaleidoscopic.sound.ModBlockSoundGroup;
+import net.leafenzo.kaleidoscopic.registries.ModFabricRegistries;
+import net.leafenzo.kaleidoscopic.util.ModUtil;
 import net.minecraft.block.*;
-import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -57,11 +55,49 @@ public class ModBlocks {
     public static final ArrayList<Block> SAPLINGS = new ArrayList<Block>();
     public static final ArrayList<WoodSet> WOODSETS = new ArrayList<WoodSet>();
 
+    public static final ArrayList<Block> DYED_WOODEN_DOORS = dyedWoodenDoors();
+    private static ArrayList<Block> dyedWoodenDoors() {
+        ArrayList<Block> bs = new ArrayList<Block>();
+        for (DyeColor color : ModUtil.VANILLA_DYE_COLORS) {
+            Block b = registerDyedWoodenDoor(color);
+            bs.add(b);
+        }
+        return bs;
+    }
+    public static Block registerDyedWoodenDoor(DyeColor color) {
+        Block b = registerBlock(color.getName() + "_door", new DoorBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).burnable().sounds(BlockSetType.OAK.soundType()).nonOpaque().mapColor(color.getMapColor()), BlockSetType.OAK), null);
+        ModFabricRegistries.registerFuel(b, 200);
+        // not flammable because doors are just built different i guess. thx minecraft.
+        WOODEN_DOORS.add(b);
+        RENDER_LAYER_CUTOUT.add(b);
+        DYECOLOR_FROM_BLOCK.put(b, color);
+        return b;
+    }
+
+    public static final ArrayList<Block> DYED_WOODEN_TRAPDOORS = dyedWoodenTrapdoors();
+    private static ArrayList<Block> dyedWoodenTrapdoors() {
+        ArrayList<Block> bs = new ArrayList<Block>();
+        for (DyeColor color : ModUtil.VANILLA_DYE_COLORS) {
+            Block b = registerDyedWoodenTrapdoor(color);
+            bs.add(b);
+        }
+        return bs;
+    }
+    public static Block registerDyedWoodenTrapdoor(DyeColor color) {
+        Block b = registerBlock(color.getName() + "_trapdoor", new TrapdoorBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).sounds(BlockSetType.OAK.soundType()).nonOpaque().mapColor(color.getMapColor()), BlockSetType.OAK), null);
+        ModFabricRegistries.registerFuel(b, 300);
+        // not flammable because doors are just built different i guess. thx minecraft.
+        WOODEN_TRAPDOORS.add(b);
+        RENDER_LAYER_CUTOUT.add(b);
+        DYECOLOR_FROM_BLOCK.put(b, color);
+        return b;
+    }
+
     //TODO stair and slab variants for rocks (sans polished) and bricks
     public static final ArrayList<Block> DYED_ROCKS = dyedRocks();
     private static ArrayList<Block> dyedRocks() {
         ArrayList<Block> bs = new ArrayList<Block>();
-        for (DyeColor color : DyeColor.values()) {
+        for (DyeColor color : ModUtil.VANILLA_DYE_COLORS) {
             Block b = registerDyedRock(color);
             bs.add(b);
         }
@@ -76,7 +112,7 @@ public class ModBlocks {
     public static final ArrayList<Block> DYED_POLISHED_ROCKS = dyedPolishedRocks();
     private static ArrayList<Block> dyedPolishedRocks() {
         ArrayList<Block> bs = new ArrayList<Block>();
-        for (DyeColor color : DyeColor.values()) {
+        for (DyeColor color : ModUtil.VANILLA_DYE_COLORS) {
             Block b = registerDyedPolishedRock(color);
             bs.add(b);
         }
@@ -91,7 +127,7 @@ public class ModBlocks {
     public static final ArrayList<Block> DYED_ROCK_BRICKS = dyedRockBricks();
     private static ArrayList<Block> dyedRockBricks() {
         ArrayList<Block> bs = new ArrayList<Block>();
-        for (DyeColor color : DyeColor.values()) {
+        for (DyeColor color : ModUtil.VANILLA_DYE_COLORS) {
             Block b = registerDyedRockBrick(color);
             DYECOLOR_FROM_BLOCK.put(b, color);
             bs.add(b);

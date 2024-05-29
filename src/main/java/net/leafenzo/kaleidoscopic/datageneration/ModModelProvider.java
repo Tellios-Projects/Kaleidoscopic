@@ -203,6 +203,12 @@ public class ModModelProvider extends FabricModelProvider {
         for(Block block : ModBlocks.DYED_ROCK_BRICKS) {
             blockStateModelGenerator.registerCubeAllModelTexturePool(block);
         }
+        for(Block block : ModBlocks.DYED_WOODEN_DOORS) {
+            blockStateModelGenerator.registerDoor(block);
+        }
+        for(Block block : ModBlocks.DYED_WOODEN_TRAPDOORS) {
+            blockStateModelGenerator.registerTrapdoor(block);
+        }
 
         // Block Models
         // Cube with all sides the same texture, IE Dirt
