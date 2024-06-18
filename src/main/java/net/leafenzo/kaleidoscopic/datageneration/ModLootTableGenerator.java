@@ -49,6 +49,10 @@ public class ModLootTableGenerator extends FabricBlockLootTableProvider {
         //this.addDrop(ModBlocks.COMPRESSED_OAK_LEAVES, (Block block) -> this.leavesDrops((Block)block, Blocks.OAK_SAPLING, SAPLING_DROP_CHANCE));
         //this.addDropWithSilkTouch(ModBlocks.EGG_BLOCK);
 
+        for(Block block : ModBlocks.SLABS) {
+            this.addDrop(block, (Block b) -> this.slabDrops((Block) b));
+        }
+
         for(Block block : ModBlocks.DYED_WOODEN_DOORS) {
             this.addDrop(block, (Block b) -> this.doorDrops((Block) b));
         }
