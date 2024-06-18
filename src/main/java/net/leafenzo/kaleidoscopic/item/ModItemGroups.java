@@ -85,8 +85,7 @@ public class ModItemGroups {
     public static ItemGroup KALEIDOSCOPIC_STONES = Registry.register(Registries.ITEM_GROUP, new Identifier(Super.MOD_ID, "kaleidoscopic_stones"),
             FabricItemGroup.builder().displayName(Text.translatable("itemgroup.kaleidoscopic_stones"))
                     .icon(() -> new ItemStack(ModBlocks.DYED_POLISHED_ROCKS.get(8))).entries((displayContext, entries) -> {
-                     entries.addAll(orderBlocksByColor(ModBlocks.DYECOLOR_FROM_BLOCK, ModBlocks.DYED_ROCKS, ModBlocks.DYED_POLISHED_ROCKS));
-                     entries.addAll(orderBlocksByColor(ModBlocks.DYECOLOR_FROM_BLOCK, ModBlocks.DYED_ROCK_BRICKS));
+                     entries.addAll(orderBlocksByColor(ModBlocks.DYECOLOR_FROM_BLOCK, ModBlocks.DYED_ROCKS, ModBlocks.DYED_POLISHED_ROCKS, ModBlocks.DYED_ROCK_BRICKS));
                     }).build());
 
     public static ItemGroup KALEIDOSCOPIC_DOORS = Registry.register(Registries.ITEM_GROUP, new Identifier(Super.MOD_ID, "kaleidoscopic_doors"),
